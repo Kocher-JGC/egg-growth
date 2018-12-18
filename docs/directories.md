@@ -1,3 +1,4 @@
+```
 egg-project
 ├── package.json
 ├── app.js (可选) # 用于自定义启动时的初始化工作
@@ -38,5 +39,5 @@ egg-project
 ​    └── controller
 ​        └── home.test.js
 
-
+```
 
