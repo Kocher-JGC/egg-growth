@@ -118,7 +118,7 @@ exports.destroy = async () => {};
 
 ### 例子
 
-#### 定义URL规则
+#### 定义URL规则（获取get参数）
 
 ```javascript
 // app/router.js
@@ -126,7 +126,7 @@ module.exports = app => {
   // 在app中获取router 和 controller  
   const { router, controller } = app;
   // git请求 /user 获取get请求参数id
-  router.get('/user/:id', controller.user.info);
+  router.get('/user/:id/:name', controller.user.info);
 };
 ```
 
@@ -139,7 +139,7 @@ class UserController extends Controller {
     // 拿到context
     const { ctx } = this;
     ctx.body = { // 获取‘请求参数 ，然后输出到body
-      name: `hello ${ctx.params.id}`,
+      name: `hello ${ctx.params.id} you name is ${ctx.params.name}`,
     };
   }
 }
