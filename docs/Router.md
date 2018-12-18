@@ -118,7 +118,7 @@ exports.destroy = async () => {};
 
 ### 例子
 
-#### 定义URL规则（获取get参数）
+#### 1、简单定义URL规则（获取get参数）
 
 ```javascript
 // app/router.js
@@ -130,7 +130,7 @@ module.exports = app => {
 };
 ```
 
-#### controller
+##### controller
 
 ```javascript
 // app/controller/user.js
@@ -144,3 +144,86 @@ class UserController extends Controller {
   }
 }
 ```
+
+#### 2、对比不同的参数的获取
+
+```javascript
+// app/router.js
+module.exports = app => {
+  const { router, controller } = app;
+  // url 写法 /user/123/name
+  router.get('/user/:id/:name', controller.user.info);
+  // url 写法 /user/search?name=searchName
+  router.get('/user/search',controller.user.search);
+  // 获取POST
+  router.post('/user/form',controller.user.form);
+};
+```
+
+##### controller
+
+```javascript
+// app/controller/user.js
+class UserController extends Controller {
+  async info() {
+    const { ctx } = this;
+    ctx.body = { 
+      // 在params中获取参数
+      name: `hello ${ctx.params.id} you name is ${ctx.params.name}`,
+    };
+  }
+  async search() {
+    const { ctx } = this;
+    ctx.body = `search: ${ctx.query.name}`; // 在query中获取参数
+  }
+  async form() {
+    const { ctx } = this;
+    // 在request.body中获取所有post  // 以及注意csrf攻击
+    ctx.body = `body: ${JSON.stringify(ctx.request.body)}`;
+  }
+}
+```
+
+#### 3、不同使用的整合（引入路由、正则、别名、第二种控制器写法、重定向）
+
+```javascript
+/** 主要解析路由的定义和作用、不写控制器。 如需查看可以查看，/app/controller/router/* **/
+module.exports = app => {
+  const { router, controller, middlewares } = app;
+  // 引入router下面的router-user路由规则
+  require('./router/router-user')(app);
+  // 对比下面两条1、两种控制器的写法2、如何路由取别名3、使用中间件
+  router.get('/', controller.router.home.index);
+  router.get('s', '/search', middlewares.uppercase(), 'router.package.search');
+
+  // 正则使用 --> 形如：/package/paramKey/paramVal
+  router.get(/^\/package\/([\w-.]+\/[\w-.]+)$/, controller.router.package.detail);
+
+  // 重定向
+  router.get('index', '/home/index', controller.router.home.index);
+  router.redirect('/', '/home/index', 302);
+  // 外部重定向 主要利用ctx.redirect进行重定向
+};
+```
+
+#### 4、RESTful 风格
+
+> 主要理解RESTful风格支持哪些请求、以及接受请求后对应的controller如何处理
+>
+> 规定的有哪几种请求，如何使用。对应的fn是哪个。
+
+> 没有写页面的同学可以使用Postman或Altair GraphQL或curl等工具请求
+
+```javascript
+// app/router.js // 就这么简单，重在理解
+module.exports = app => {
+  const { router, controller } = app;
+  router.resources('posts', '/api/posts', controller.posts);
+};
+```
+
+#### 5、egg-router-plus插件
+
+官方也提供了一个[egg-router-plus](https://github.com/eggjs/egg-router-plus)插件来进行，路由管理。看了看教程感觉不好用就没写了。
+
+感觉直接引入文件，更直观好用。
