@@ -1,2 +1,2 @@
 ## Egg 的爬坑之路。。。。。
-### 说明都在[docs](./docs)
+### 说明都在[docs](./docs/directories.md)
