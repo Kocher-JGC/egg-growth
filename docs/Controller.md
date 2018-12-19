@@ -395,7 +395,7 @@ module.exports = {
 
 特别是如果我们通过 <font color=28a745>`config.proxy = true`</font> 设置了应用部署在反向代理（Nginx）之后，有一些 Getter 的内部处理会发生改变。
 
-<font color=28a745>`ctx.host`
+<font color=28a745>`ctx.host`</font>
 
 优先读通过<font color=28a745> `config.hostHeaders`</font> 中配置的 header 的值，读不到时再尝试获取 host 这个 header 的值，如果都获取不到，返回空字符串。
 
