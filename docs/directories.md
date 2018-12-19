@@ -1,10 +1,10 @@
-```
+<pre style="background: #f8f8f8;border-radius:3px;">
 egg-project
 ├── package.json
 ├── app.js (可选) # 用于自定义启动时的初始化工作
 ├── agent.js (可选) # 用于自定义启动时的初始化工作
 ├── app
-|   ├── [router.js #用于配置 URL 路由规则](./Router.md)
+|   ├── router.js #用于配置 URL 路由规则
 │   ├── controller	#用于解析用户的输入，处理后返回相应的结果
 │   |   └── home.js
 │   ├── service (可选) # 用于编写业务逻辑层
@@ -34,10 +34,9 @@ egg-project
 |   ├── config.local.js (可选)
 |   └── config.unittest.js (可选)
 └── test # 单元测试
-​    ├── middleware
-​    |   └── response_time.test.js
-​    └── controller
-​        └── home.test.js
-
-```
+    ├── middleware
+    |   └── response_time.test.js
+    └── controller
+        └── home.test.js
+</pre>
 
