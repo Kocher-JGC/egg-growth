@@ -53,5 +53,44 @@ module.exports = appInfo => {
     csrf: false, // csrf的防范
   };
 
+  // 配置mysql
+  config.mysql = {
+    // 单数据库信息配置
+    client: {
+      host: '127.0.0.1', // host mysql地址
+      port: '3306',
+      user: 'root',
+      password: 'admin12388',
+      // password: 'root',
+      database: 'test', // 数据库名
+    },
+    // 是否加载到 app 上，默认开启
+    app: true,
+    // 是否加载到 agent 上，默认关闭
+    agent: false,
+  };
+
+
+  config.io = {
+    init: { wsEngine: 'ws' }, // default: ws it can use uws
+    namespace: {
+      // 命名空间为 / 与 /example, 不是 example
+      '/': {
+        connectionMiddleware: [],
+        packetMiddleware: [],
+      },
+      '/example': {
+        connectionMiddleware: [],
+        packetMiddleware: [],
+      },
+    },
+    // redis: {
+    //   host: { redis server host },
+    //   port: { redis server prot },
+    //   auth_pass: { redis server password },
+    //   db: 0,
+    // },
+  };
+
   return config;
 };

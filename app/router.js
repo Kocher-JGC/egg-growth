@@ -9,6 +9,7 @@ module.exports = app => {
 
   // 导入user路由 // 也可以使用egg-router-plus 但是看例子好像不好用
   require('./router/router-user')(app);
+  require('./router/router-mysql')(app);
 
   // app/controller/package.js // /package/paramKey/paramVal
   router.get(/^\/package\/([\w-.]+\/[\w-.]+)$/, controller.router.package.detail);
@@ -20,4 +21,7 @@ module.exports = app => {
   router.redirect('/', '/home/index', 302);
   // 外部重定向
   router.get('/search', controller.router.home.search);
+
+  // RESTful API
+  // router.resources('users', '/users', controller.users);
 };
