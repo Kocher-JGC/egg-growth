@@ -6,3 +6,13 @@ exports.validate = {
   enable: true,
   package: 'egg-validate',
 };
+// 开启mysql
+exports.mysql = {
+  enable: true,
+  package: 'egg-mysql',
+};
+
+exports.io = {
+  enable: true,
+  package: 'egg-socket.io',
+};
