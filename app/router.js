@@ -24,4 +24,7 @@ module.exports = app => {
 
   // RESTful API
   // router.resources('users', '/users', controller.users);
+
+  // mongo
+  router.get('/mongo', controller.mongo.user.index);
 };

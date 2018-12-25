@@ -92,5 +92,19 @@ module.exports = appInfo => {
     // },
   };
 
+  config.mongoose = {
+    url: 'mongodb://127.0.0.1/local',
+    options: {},
+  };
+
   return config;
 };
+
+
+// recommended
+// exports.mongoose = {
+//   client: {
+//     url: 'mongodb://127.0.0.1/example',
+//     options: {},
+//   },
+// };
